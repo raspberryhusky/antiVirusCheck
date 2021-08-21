@@ -123,7 +123,6 @@ popup beacon_bottom {
                             "AvastUI.exe"=> "Avast!5主程序",
                         );
                     bshell($1,"tasklist /SVC");
-                    $bid = $1;
                     on beacon_output {
                         $message = $2;
                         @array = split(" ",$message);
@@ -144,8 +143,8 @@ popup beacon_bottom {
 
                         foreach $key (%sr){
                             if ($key isin $string1){
-                                println("\cBThere is antiVirus: ".%sr[$key]." => IPaddress:".targets()[$bid]["address"]);
-                                elog("\cBThere is antiVirus: ".%sr[$key]." => IPaddress:".targets()[$bid]["address"]);
+                                println("\cBThere is antiVirus: ".%sr[$key]." => IPaddress:".binfo($1)['internal']);
+                                elog("\cBThere is antiVirus: ".%sr[$key]." => IPaddress:".binfo($1)['internal']);
                             }
                         }
 
